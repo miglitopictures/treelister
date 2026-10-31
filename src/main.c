@@ -15,19 +15,6 @@
 #include <stdbool.h>
 #include <dirent.h> // DIRectory ENTry... ok
 
-// helper string function
-// checks if a character exists inside a string
-bool contains_character(char character, char *string) {
-    int i = 0;
-    while (string[i] != '\0') {
-        if (string[i] == character) {
-            return true;
-        }
-        i++;
-    }
-    return false;
-}
-
 // traverses the directory specified by `path` printing its entries
 // if a entry is a directory, recursively call walk() on it.
 void walk(char *path, int depth) {
