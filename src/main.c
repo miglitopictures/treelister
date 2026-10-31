@@ -29,7 +29,6 @@ void walk(char *path, int depth) {
         entry = readdir(diretory);
         if (entry == NULL) { break; }
         
-        
         // skip "." and ".." entries
         if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0) {
             continue;
@@ -38,23 +37,20 @@ void walk(char *path, int depth) {
         // add spacing based on "depth"
         for (int i = 0; i < depth; i++) { printf("  "); }
 
-        // get new_path by contatonating tpath with the name 
+        // get new_path by concatonating path with the name 
         char new_path[4096];
         snprintf(new_path, sizeof(new_path), "%s/%s", path, entry->d_name);
 
         // if is DIRECTORY:
-        // concatonate the path with the name to get new_path.
-        // and make the recursive call on it.
         if (entry->d_type == DT_DIR) {
             printf("\x1B[1;33mL %s/\x1B[0m\n", entry->d_name);
-            walk(new_path, depth + 1);
+            walk(new_path, depth + 1); // make the recursive call on it.
         }
         // if is FILE:
-        // get file info with stat() and use `bitwise AND` (&) on `st_mode`
-        // to check if is executable file (https://pubs.opengroup.org/onlinepubs/7908799/xsh/sysstat.h.html)
         else {
+            // get file info with stat() and use `bitwise AND` (&) on `st_mode`
+            // to check if is executable file, print it diferently.
             struct stat file_info;
-            
             if (stat(new_path, &file_info) == 0 && (file_info.st_mode & S_IXUSR)) {  // S_IXUSR - execute/search permission, owner 
                 printf("L \x1B[36m%s\x1B[0m\n", entry->d_name);
             }
@@ -75,8 +71,7 @@ int main(int argument_count, char **arguments) {
         path = arguments[1];
     }
 
-
-
+    // print path
     printf("%s/\n", path);
     
     // treverse directory
