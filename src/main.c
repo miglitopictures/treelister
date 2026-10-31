@@ -50,16 +50,19 @@ void walk(char *path, int depth) {
         // add spacing based on "depth"
         for (int i = 0; i < depth; i++) { printf("  "); }
 
-        // print entry name
-        printf("L %s\n", entry->d_name);
-
-        // If is directory (does not contain '.'),
+        
+        // if is directory:
         // concatonate the path with the name to get new_path.
         // and make the recursive call on it.
-        if (!contains_character('.', entry->d_name)) {
+        if (entry->d_type == DT_DIR) {
+            printf("L %s/\n", entry->d_name);
             char new_path[4096];
             snprintf(new_path, sizeof(new_path), "%s/%s", path, entry->d_name);
             walk(new_path, depth + 1);
+        }
+        // if is FILE:
+        else {            
+            printf("L %s\n", entry->d_name);
         }
     }
 
@@ -73,9 +76,6 @@ int main(int argc, char **argv) {
     if (argc > 1) {
         path = argv[1];
     }
-
-    // print root directory path
-    printf("%s/\n", path);
     
     // treverse directory
     walk(path, 0);

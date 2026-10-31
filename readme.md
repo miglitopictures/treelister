@@ -18,3 +18,4 @@ in the first 78 seconds of this video -> https://www.youtube.com/watch?v=tiMHtc6
 - https://man7.org/linux/man-pages/man3/closedir.3p.html
 - https://www.ibm.com/docs/en/zos/3.1.0?topic=functions-opendir-open-directory
 - https://www.ibm.com/docs/en/zos/3.1.0?topic=functions-readdir-read-entry-from-directory
+- https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/dirent.h.html
