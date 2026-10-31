@@ -55,7 +55,7 @@ void walk(char *path, int depth) {
         else {
             struct stat file_info;
             
-            if (stat(new_path, &file_info) != 0 && (file_info.st_mode & S_IXUSR)) {  // S_IXUSR - execute/search permission, owner 
+            if (stat(new_path, &file_info) == 0 && (file_info.st_mode & S_IXUSR)) {  // S_IXUSR - execute/search permission, owner 
                 printf("L \x1B[36m%s\x1B[0m\n", entry->d_name);
             }
             else {
