@@ -42,7 +42,7 @@ void walk(char *path, int depth) {
         // concatonate the path with the name to get new_path.
         // and make the recursive call on it.
         if (entry->d_type == DT_DIR) {
-            printf("\x1B[1mL %s/\x1B[0m\n", entry->d_name);
+            printf("\x1B[1;33mL %s/\x1B[0m\n", entry->d_name);
             char new_path[4096];
             snprintf(new_path, sizeof(new_path), "%s/%s", path, entry->d_name);
             walk(new_path, depth + 1);
