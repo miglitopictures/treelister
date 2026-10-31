@@ -54,9 +54,8 @@ void walk(char *path, int depth) {
         // to check if is executable file (https://pubs.opengroup.org/onlinepubs/7908799/xsh/sysstat.h.html)
         else {
             struct stat file_info;
-            stat(new_path, &file_info);
             
-            if (file_info.st_mode & S_IXUSR) {  // S_IXUSR - execute/search permission, owner 
+            if (stat(new_path, &file_info) != 0 && (file_info.st_mode & S_IXUSR)) {  // S_IXUSR - execute/search permission, owner 
                 printf("L \x1B[36m%s\x1B[0m\n", entry->d_name);
             }
             else {
